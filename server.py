@@ -6,10 +6,15 @@ import mysql.connector
 app = Flask(__name__)
 CORS(app)
 
-cnx = mysql.connector.connect(user='root', password='Sgrnvn@14',
-                              host='127.0.0.1',
-                              database='grocery_store')
+import os
 
+cnx = mysql.connector.connect(
+    host=os.environ.get('mysql.railway.internal'),
+    user=os.environ.get('root'),
+    password=os.environ.get('eNxmNedoxXRGRDxAtdkoRJdvGZdbCwbo'),
+    database=os.environ.get('railway'),
+    port=int(os.environ.get('3306', 3306))
+)
 
 @app.route('/get_products', methods=['GET'])
 def get_products():
